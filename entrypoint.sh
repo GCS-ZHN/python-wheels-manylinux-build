@@ -8,6 +8,7 @@ SYSTEM_PACKAGES=$3
 PRE_BUILD_COMMAND=$4
 PACKAGE_PATH=$5
 PIP_WHEEL_ARGS=$6
+SOURCE=$7
 
 # Temporary workaround for LD_LIBRARY_PATH issue. See
 # https://github.com/RalfG/python-wheels-manylinux-build/issues/26
@@ -49,7 +50,7 @@ for PY_VER in "${arrPY_VERSIONS[@]}"; do
     fi
 
     # Build wheels
-    /opt/python/"${PY_VER}"/bin/pip wheel . ${PIP_WHEEL_ARGS} || { echo "Building wheels failed."; exit 1; }
+    /opt/python/"${PY_VER}"/bin/pip wheel ${SOURCE} ${PIP_WHEEL_ARGS} || { echo "Building wheels failed."; exit 1; }
 done
 
 # Bundle external shared libraries into the wheels

@@ -27,6 +27,10 @@ inputs:
     description: 'extra arguments to pass to the `pip wheel` command, passed paths are relative to `package-path`'
     required: false
     default: '-w ./dist --no-deps'
+  source:
+    description: 'source of compilation, a directory or a  tar.gz file'
+    required: false
+    default: '.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -37,6 +41,7 @@ runs:
     - ${{ inputs.pre-build-command }}
     - ${{ inputs.package-path }}
     - ${{ inputs.pip-wheel-args}}
+    - ${{ inputs.source }}
 branding:
   icon: 'package'
   color: 'green'
